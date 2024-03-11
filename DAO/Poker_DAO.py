@@ -1,11 +1,12 @@
 import requests
 
 
-class Poker():
+class Poker_DAO():
     """
     """
     def __init__(self):
         self.deck_id = None
+        self.pot = 0
 
     def creation_deck(self):
         """
@@ -22,8 +23,16 @@ class Poker():
         tirage = response.json()
         return tirage["cards"]
 
+    def ajout_pot(self, montant):
+        """
+        """
+        self.pot = self.pot + montant
 
-P = Poker()
+
+P = Poker_DAO()
 P.creation_deck()
 print(P.deck_id)
-print(P.draw(2)[1])
+print(P.draw(1)[0])
+print(P.pot)
+P.ajout_pot(15)
+print(P.pot)
