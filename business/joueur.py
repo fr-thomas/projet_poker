@@ -14,14 +14,14 @@ class Joueur():
         #           Attributes             #
         ####################################
 
-        self._name = name
-        self._pot = pot
+        self.name = name
+        self.pot = pot
 
     ####################################
     #             Methods              #
     ####################################
     def __str__(self):
         return (
-            f"name: {self._name}, "
-            f"pot: {self._pot}, "
+            f"name: {self.name}, "
+            f"pot: {self.pot}, "
         )

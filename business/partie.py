@@ -17,14 +17,15 @@ class Partie():
         #           Attributes             #
         ####################################
 
-        self._deck_id = deck_id
-        self._pot = nbr_joueur
+        self.deck_id = deck_id
+        self.nbr_joueure = nbr_joueur
+        self.pot = 0
 
     ####################################
     #             Methods              #
     ####################################
     def __str__(self):
         return (
-            f"name: {self._name}, "
-            f"pot: {self._pot}, "
+            f"name: {self.name}, "
+            f"pot: {self.pot}, "
         )

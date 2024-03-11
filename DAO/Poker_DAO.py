@@ -23,16 +23,9 @@ class Poker_DAO():
         tirage = response.json()
         return tirage["cards"]
 
-    def ajout_pot(self, montant):
-        """
-        """
-        self.pot = self.pot + montant
 
 
-P = Poker_DAO()
-P.creation_deck()
-print(P.deck_id)
-print(P.draw(1)[0])
-print(P.pot)
-P.ajout_pot(15)
-print(P.pot)
+#P = Poker_DAO()
+#P.creation_deck()
+#print(P.deck_id)
+#print(P.draw(1)[0])
