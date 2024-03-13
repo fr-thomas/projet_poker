@@ -47,7 +47,7 @@ class Poker_View():
                     joueur.joue_encore = True
                 else:
                     joueur.joue_encore = False
-    
+
     def manche_deux(self):
         "Represente du flop au turn et du turn à la river"
         Partie = Partie_services(self.partie)
@@ -77,7 +77,7 @@ class Poker_View():
                     joueur.joue_encore = True
                 else:
                     joueur.joue_encore = False
-    
+
     def manche_trois(self):
         "Représente la river à la fin"
         Partie = Partie_services(self.partie)
