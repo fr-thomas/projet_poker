@@ -21,9 +21,15 @@ class Partie_services():
         self.Partie.pot += montant
     
     def gain_pot(self, joueur):
-        for j in self.joueurs:
-            if j.name == joueur:
+        if type(joueur) == str:
+            for j in self.Partie.list_joueur:
+                if j.name == joueur:
                    j.pot += self.Partie.pot
+        elif type(joueur) == list:
+            ponderation = len(joueur)
+            for j in self.Partie.list_joueur:
+                if j.name in joueur:
+                   j.pot += self.Partie.pot / ponderation
         self.Partie.pot = 0
 
     def distribution(self):

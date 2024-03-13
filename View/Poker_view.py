@@ -98,7 +98,7 @@ class Poker_View():
             self.partie.next_parle()
         if self.partie.en_lice() is True:
             gagnant = self.partie.better_hand()
-            Partie.gain_pot(self.partie.en_lice())
+            Partie.gain_pot(gagnant)
         else:
             Partie.gain_pot(self.partie.en_lice())
             self.partie.next_blind()
