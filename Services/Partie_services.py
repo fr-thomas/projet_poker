@@ -39,12 +39,7 @@ class Partie_services():
                 if self.Partie.list_joueur[i].mise != self.Partie.mise_max:
                     return False
         return True
-    
-    def better_hand(self):
-        """
-        calcul qui a la meilleur main
-        """
-        pass
+
 
 #P=Partie_services(3456,3,[Joueur("Alice",3),Joueur("Bob",0),Joueur("Martin",10)])
 #print(P.Partie.pot)
