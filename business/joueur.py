@@ -7,7 +7,7 @@ class Joueur():
     def __init__(
         self,
         name,
-        pot
+        pot,
     ) -> None:
 
         ####################################
@@ -16,6 +16,9 @@ class Joueur():
 
         self.name = name
         self.pot = pot
+        self.main = None
+        self.mise = 0
+        self.joue_encore = True
 
     ####################################
     #             Methods              #
@@ -24,4 +27,7 @@ class Joueur():
         return (
             f"name: {self.name}, "
             f"pot: {self.pot}, "
+            f"main: {self.main}, "
+            f"mise: {self.mise}, "
+            f"joue_encore: {self.joue_encore}, "
         )

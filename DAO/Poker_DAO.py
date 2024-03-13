@@ -17,7 +17,7 @@ class Poker_DAO():
 
     def draw(self, nbr_carte):
         """
-        Tirer 1-2 carte(s)
+        Tirer 1-2-3 carte(s)
         """
         response = requests.get(f"https://deckofcardsapi.com/api/deck/{self.deck_id}/draw/?count={nbr_carte}")
         tirage = response.json()
