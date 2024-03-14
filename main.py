@@ -10,4 +10,4 @@ if __name__ == "__main__":
     list_joueur = [Joueur("Thomas", 100), Joueur("Léna", 100)]
     Partie1 = Partie(Poker_D.deck_id, list_joueur)
     Poker_V = Poker_View(Partie1)
-    Poker_V.manche_un()
+    manche_une = Poker_V.manche_un()
