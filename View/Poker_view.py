@@ -9,17 +9,23 @@ from Services.Partie_services import Partie_services
 class Poker_View():
     """
     """
-    def __init__(self, nbr_joueur, list_nom, pot_indiv, pot_depart = 0) -> None:
-        Poker = Poker_DAO()
-        Poker.creation_deck()
-        list_joueur = []
-        for i in range(nbr_joueur):
-            list_joueur.append(Joueur(list_nom[i], pot_indiv))
-        self.partie = Partie(Poker.deck_id, list_joueur, pot_depart)
+    def __init__(self, partie : Partie):
+    #def __init__(self, nbr_joueur, list_nom, pot_indiv, pot_depart = 0) -> None:
+    #    Poker = Poker_DAO()
+    #    Poker.creation_deck()
+    #    list_joueur = []
+    #    for i in range(nbr_joueur):
+    #        list_joueur.append(Joueur(list_nom[i], pot_indiv))
+    #    self.partie = Partie(Poker.deck_id, list_joueur, pot_depart)
+        self.partie = partie
 
     def manche_un(self):
         "Du début au flop"
         Partie = Partie_services(self.partie)
+        Poker = Poker_DAO()
+        for joueur in self.partie.list_joueur:
+            joueur.main = Poker.draw(self.partie.deck_id, 2)
+            print(joueur.main)
         Partie.ajout_pot(10, self.partie.blind)
         self.partie.next_parle()
         Partie.ajout_pot(20, self.partie.parle)
@@ -29,16 +35,16 @@ class Poker_View():
             if choix == "suivre":
                 Partie.ajout_pot(self.partie.mise_max - self.partie.list_joueur[self.partie.parle].mise, self.partie.parle)
             if choix == "relancer":
-                relance = input("Relancer à combien: ")
+                print("non")
+                relance = int(input("Relancer à combien: "))
                 Partie.ajout_pot(relance - self.partie.list_joueur[self.partie.parle].mise, self.partie.parle)
                 self.partie.list_joueur[self.partie.parle].mise = relance
             if choix == "coucher":
                 self.partie.list_joueur[self.partie.parle].joue_encore = False
             self.partie.next_parle()
         if self.partie.en_lice() is True:
-            Poker = Poker_DAO()
-            draw = Poker.draw(3)
-            self.partie.carte_commune + draw["cards"]
+            draw = Poker.draw(self.partie.deck_id, 3)
+            self.partie.carte_commune += draw
         else:
             Partie.gain_pot(self.partie.en_lice())
             self.partie.next_blind()
@@ -67,7 +73,7 @@ class Poker_View():
             self.partie.next_parle()
         if self.partie.en_lice() is True:
             Poker = Poker_DAO()
-            draw = Poker.draw(1)
+            draw = Poker.draw(self.partie.deck_id, 1)
             self.partie.carte_commune + draw["cards"]
         else:
             Partie.gain_pot(self.partie.en_lice())

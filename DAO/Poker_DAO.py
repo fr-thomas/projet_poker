@@ -6,7 +6,6 @@ class Poker_DAO():
     """
     def __init__(self):
         self.deck_id = None
-        self.pot = 0
 
     def creation_deck(self):
         """
@@ -15,11 +14,11 @@ class Poker_DAO():
         deck = response.json()
         self.deck_id = deck["deck_id"]
 
-    def draw(self, nbr_carte):
+    def draw(self, deck_id, nbr_carte):
         """
         Tirer 1-2-3 carte(s)
         """
-        response = requests.get(f"https://deckofcardsapi.com/api/deck/{self.deck_id}/draw/?count={nbr_carte}")
+        response = requests.get(f"https://deckofcardsapi.com/api/deck/{deck_id}/draw/?count={nbr_carte}")
         tirage = response.json()
         return tirage["cards"]
 

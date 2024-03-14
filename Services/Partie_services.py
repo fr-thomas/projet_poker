@@ -19,7 +19,9 @@ class Partie_services():
             if j.name == joueur:
                    j.pot -= montant
         self.Partie.pot += montant
-    
+        self.Partie.mise_max = montant + self.Partie.list_joueur[joueur].mise
+        self.Partie.list_joueur[joueur].mise = self.Partie.mise_max
+
     def gain_pot(self, joueur):
         if type(joueur) == str:
             for j in self.Partie.list_joueur:
@@ -34,9 +36,9 @@ class Partie_services():
 
     def distribution(self):
         for joueur in self.joueurs:
-            joueur.main = self.deck.draw(2)
+            joueur.main = self.deck.draw(self.Partie.deck_id, 2)
 
-    def mise_egal(self):
+    def mise_egale(self):
         """
         Verifie l'egalité de mise de chaque joueur encore en jeux
         """

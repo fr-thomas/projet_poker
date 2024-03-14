@@ -23,8 +23,8 @@ class Partie():
         self.deck_id = deck_id
         self.list_joueur = list_joueur
         self.pot = pot
-        self.blind = list_joueur[0].name
-        self.parle = list_joueur[0].name
+        self.blind = 0
+        self.parle = 0
         self.mise_max = 0
         self.carte_commune = []
 
@@ -43,20 +43,17 @@ class Partie():
         )
 
     def next_blind(self):
-        global index_blind
-        index_blind = (index_blind + 1) % len(self.list_joueur)
-        if self.list_joueur[index_blind].joue_encore is False:
-            self.next_blind()
-        else:
-            self.blind = self.list_joueur[index_blind].name
+        index_blind = (self.list_joueur.index(self.blind)+ 1) % len(self.list_joueur)
+        while not self.list_joueur[index_blind].joue_encore:
+            index_blind = (index_blind + 1) % len(self.list_joueur)
+        self.blind = self.list_joueur[index_blind].name
 
     def next_parle(self):
-        global index_parle
-        index_parle = (index_parle + 1) % len(self.list_joueur)
-        if self.list_joueur[index_parle].joue_encore is False:
-            self.next_parle()
-        else:
-            self.parle = self.list_joueur[index_parle].name
+        current_index = self.parle
+        next_index = (current_index + 1) % len(self.list_joueur)
+        while not self.list_joueur[next_index].joue_encore:
+            next_index = (next_index + 1) % len(self.list_joueur)
+        self.parle = next_index
 
     def en_lice(self):
         compteur = 0
