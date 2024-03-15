@@ -11,7 +11,7 @@ class Joueur():
         premier_tour (bool): Indique si c'est le premier tour de jeu pour le joueur, initialisé à True.
     """
 
-    def __init__(self, name, pot,):
+    def __init__(self, name):
         """
         Initialise un objet Joueur avec le nom et le montant initial du pot du joueur.
 
@@ -20,7 +20,7 @@ class Joueur():
             pot (float): Le montant initial d'argent pour le joueur.
         """
         self.name = name
-        self.pot = pot
+        self.pot = 500
         self.main = None
         self.mise = 0
         self.joue_encore = True

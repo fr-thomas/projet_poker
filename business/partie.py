@@ -17,7 +17,7 @@ class Partie():
         carte_commune (list): Les cartes commune a tous les joueurs.
     """
 
-    def __init__(self, deck_id, list_joueur : list[Joueur], pot = 0):
+    def __init__(self, deck_id, list_joueur : list[Joueur]):
         """
         Initialise un objet Partie avec l'identifiant du jeu de cartes, la liste des joueurs et le montant initial du pot.
 
@@ -28,9 +28,9 @@ class Partie():
         """
         self.deck_id = deck_id
         self.list_joueur = list_joueur
-        self.pot = pot
-        self.blind = 0
-        self.parle = 0
+        self.pot = 0
+        self.blind = self.list_joueur[0]
+        self.parle = self.list_joueur[0]
         self.mise_max = 0
         self.carte_commune = []
 
@@ -58,18 +58,17 @@ class Partie():
         index_blind = (self.list_joueur.index(self.blind)+ 1) % len(self.list_joueur)
         while not self.list_joueur[index_blind].joue_encore:
             index_blind = (index_blind + 1) % len(self.list_joueur)
-        self.blind = self.list_joueur[index_blind].name
-        self.parle = self.list_joueur[index_blind].name
+        self.blind = self.list_joueur[index_blind]
+        self.parle = self.list_joueur[index_blind]
 
     def next_parle(self):
         """
         Passe la parole au prochain joueur encore en jeu.
         """
-        current_index = self.parle
-        next_index = (current_index + 1) % len(self.list_joueur)
-        while not self.list_joueur[next_index].joue_encore:
-            next_index = (next_index + 1) % len(self.list_joueur)
-        self.parle = next_index
+        index_parle = (self.list_joueur.index(self.parle) + 1) % len(self.list_joueur)
+        while not self.list_joueur[index_parle].joue_encore:
+            index_parle = (index_parle + 1) % len(self.list_joueur)
+        self.parle = self.list_joueur[index_parle]
 
     def en_lice(self):
         """
@@ -181,11 +180,8 @@ class Partie():
                             break
 
             meilleur_main[joueur.name] = meilleures_evaluation
-        print(meilleur_main)
         score_max = max(meilleur_main[joueur][0] for joueur in meilleur_main)
         joueurs_max_score = [joueur for joueur in meilleur_main if meilleur_main[joueur][0] == score_max]
-        print(score_max)
-        print(joueurs_max_score)
 
         if len(joueurs_max_score) == 1:
                return joueurs_max_score[0]

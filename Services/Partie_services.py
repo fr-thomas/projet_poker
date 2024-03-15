@@ -29,11 +29,11 @@ class Partie_services():
         """
         for j in self.Partie.list_joueur:
             if j.name == joueur:
-                   j.pot -= montant
-        self.Partie.pot += montant
-        self.Partie.mise_max = montant + self.Partie.list_joueur[joueur].mise
-        self.Partie.list_joueur[joueur].mise = self.Partie.mise_max
-        self.Partie.list_joueur[joueur].premier_tour = False
+                j.pot -= montant
+                self.Partie.pot += montant
+                self.Partie.mise_max = montant + j.mise
+                j.mise = self.Partie.mise_max
+                j.premier_tour = False
 
     def gain_pot(self, joueur):
         """

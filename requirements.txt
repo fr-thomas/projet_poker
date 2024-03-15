@@ -1,0 +1,7 @@
+requests
+tkinter
+messagebox
+PIL
+io
+itertools
+sqlite3
